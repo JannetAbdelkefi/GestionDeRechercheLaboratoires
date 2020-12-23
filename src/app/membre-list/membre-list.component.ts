@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MemberService} from '../../services/member.service';
+import {Member} from '../../models/member.model';
 
 @Component({
   selector: 'app-membre-list',
@@ -8,7 +9,7 @@ import {MemberService} from '../../services/member.service';
 })
 export class MembreListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'cin', 'name', 'type', 'cv', 'createdDate'];
-  dataSource: any[] = [];
+  dataSource: Member[] = [];
   constructor(
     private memberService: MemberService
   ) {
