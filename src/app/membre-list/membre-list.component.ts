@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./membre-list.component.scss']
 })
 export class MembreListComponent implements OnInit {
-
+  displayedColumns: string[] = ['id', 'cin', 'name', 'type', 'cv', 'createdDate'];
   dataSource: any[] = [
     {
       id: '123456',
