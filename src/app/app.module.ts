@@ -7,13 +7,15 @@ import { MembreListComponent } from './membre-list/membre-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
+import { MemberFormComponent } from './member-form/member-form.component';
+import {SharedModule} from './@root/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MembreListComponent,
+    MemberFormComponent,
 
 
 
@@ -22,8 +24,11 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    MatIconModule,
+    /*MatTableModule,
+    MatIconModule,*/
+    SharedModule,
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
