@@ -1,5 +1,10 @@
+
 <p>member-form works!</p>
-<form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()">
+<div class="container">
+
+  <h4>Create New Member</h4>
+
+<form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" fxLayout="column">
   <mat-form-field>
     <input matInput placeholder="cin" formControlName="cin">
   </mat-form-field>
@@ -16,3 +21,4 @@
     <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
   </div>
 </form>
+</div>
