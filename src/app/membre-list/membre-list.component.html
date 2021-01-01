@@ -1,5 +1,5 @@
 <p>membre-list works!</p>
-<table border="1px">
+<!--<table border="1px">
     <thead>
     <tr>
       <td>ID</td>
@@ -26,8 +26,13 @@
 <br>
 <br>
 <br>
-
-
+-->
+<div class="my-16" fxLayout="row" fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" routerLink="create">
+    <mat-icon class="s-24 mr-4">add</mat-icon>
+    Create New
+  </button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">
