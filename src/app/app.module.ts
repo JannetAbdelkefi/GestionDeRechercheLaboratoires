@@ -11,6 +11,7 @@ import { MemberFormComponent } from './member-form/member-form.component';
 import {SharedModule} from './@root/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LayoutComponent } from './layout/layout.component';
     MembreListComponent,
     MemberFormComponent,
     LayoutComponent,
+    DashboardComponent,
 
 
 
