@@ -7,14 +7,16 @@ import {Member} from '../../models/member.model';
   templateUrl: './membre-list.component.html',
   styleUrls: ['./membre-list.component.scss']
 })
+
 export class MembreListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'cin', 'name', 'type', 'cv', 'createdDate', 'actions'];  dataSource: Member[] = [];
+  displayedColumns: string[] = ['id', 'cin', 'nom', 'photo', 'cv', 'dateNaissance','email','password', 'actions'];  dataSource: Member[] = [];
   constructor(
     private memberService: MemberService
   ) {
   }
 
   ngOnInit(): void {
+
     this.fetchDataSource();
   }
 

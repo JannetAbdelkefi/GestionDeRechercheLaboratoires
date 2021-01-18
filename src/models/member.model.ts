@@ -1,8 +1,12 @@
 export interface Member {
   id: string;
   cin: string;
-  name: string;
-  createdDate: string;
+  nom: string;
+  prenom: string;
+  dateNaissance: string;
   cv: string;
-  type: string;
+  photo: string;
+  email: string;
+  password: string;
+
 }

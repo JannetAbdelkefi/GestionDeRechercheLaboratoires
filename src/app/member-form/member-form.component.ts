@@ -36,17 +36,28 @@ import {MemberService} from '../../services/member.service';
   initForm(item: Member): void {
     this.form = new FormGroup({
       cin: new FormControl(item?.cin, [Validators.required]),
-      name: new FormControl(item?.name, [Validators.required]),
-      cv: new FormControl(item?.cv, [Validators.required]),
-      type: new FormControl(item?.type, [Validators.required]),
+      nom: new FormControl(item?.nom, [Validators.required]),
+      prenom: new FormControl(item?.prenom, [Validators.required]),
+      password: new FormControl(item?.password, [Validators.required]),
+      dateNaissance: new FormControl(item?.dateNaissance, [Validators.required]),
+      cv: new FormControl(item?.cv ),
+      email: new FormControl(item?.email, [Validators.required]),
     });
   }
-
+  isFormInEditMode(): boolean {
+    return !!this.currentItemId;
+  }
   onSubmit(): void {
     const objectToSubmit = {...this.item, ...this.form.value};
     console.log(objectToSubmit);
-    this.memberService.saveMember(objectToSubmit).then(() =>
-      this.router.navigate(['./members'])
-    );
+    if (this.isFormInEditMode()) {
+      this.memberService.updateMember(this.currentItemId, objectToSubmit).then(() => {
+        this.router.navigate(['./members']);
+      });
+    } else {
+      this.memberService.createMember(objectToSubmit).then(() => {
+        this.router.navigate(['./members']);
+      });
+    }
   }
 }

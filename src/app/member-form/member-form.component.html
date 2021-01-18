@@ -9,13 +9,26 @@
     <input matInput placeholder="cin" formControlName="cin">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="name" formControlName="name">
+    <input matInput placeholder="nom" formControlName="nom">
   </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="prenom" formControlName="prenom">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="password" formControlName="password">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <input matInput [matDatepicker]="picker" placeholder="dateNaissance" formControlName="dateNaissance">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
   <mat-form-field>
     <input matInput placeholder="cv"  formControlName="cv">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="type" formControlName="type" >
+    <input matInput placeholder="email" formControlName="email" >
   </mat-form-field>
   <div class="form-element">
     <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>

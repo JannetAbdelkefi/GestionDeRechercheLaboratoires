@@ -47,15 +47,22 @@
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="nom">
     <th mat-header-cell class="px-12" *matHeaderCellDef> Name</th>
-    <td mat-cell class="px-12" *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell class="px-12" *matCellDef="let element">
+      <!-- TODO: change image src with the value of photo url-->
+      <img class="s-48" style="width: 48px; height: 48px;"
+           [src]="'https://upload.wikimedia.org/wikipedia/en/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png'"
+           alt="photo"/>
+
+      {{element.nom + ' ' + element.prenom}}
+    </td>
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="type">
-    <th mat-header-cell class="px-12" *matHeaderCellDef> Type</th>
-    <td mat-cell class="px-12" *matCellDef="let element"> {{element.type}} </td>
+  <ng-container matColumnDef="photo">
+    <th mat-header-cell class="px-12" *matHeaderCellDef> Photo</th>
+    <td mat-cell class="px-12" *matCellDef="let element"> {{element.photo}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -68,10 +75,22 @@
     </td>
 
   </ng-container>
-  <ng-container matColumnDef="createdDate">
+  <ng-container matColumnDef="dateNaissance">
     <th mat-header-cell class="px-12" *matHeaderCellDef> Created Date</th>
     <td mat-cell class="px-12" *matCellDef="let element">
-      {{element.createdDate | date :'d MMMM y, HH:mm'}}
+      {{element.dateNaissance | date :'d MMMM y, HH:mm'}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell class="px-12" *matHeaderCellDef> Email</th>
+    <td mat-cell class="px-12" *matCellDef="let element">
+      {{element.email}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="password">
+    <th mat-header-cell class="px-12" *matHeaderCellDef> Password</th>
+    <td mat-cell class="px-12" *matCellDef="let element">
+      {{element.password}}
     </td>
   </ng-container>
   <ng-container matColumnDef="actions" stickyEnd>
@@ -86,6 +105,7 @@
 
     </td>
   </ng-container>
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
