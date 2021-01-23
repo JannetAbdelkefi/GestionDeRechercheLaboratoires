@@ -13,6 +13,7 @@ import {MemberService} from '../../services/member.service';
   currentItemId: string;
   item: Member;
   form: FormGroup;
+  radioSelected: string = '';
 
   constructor(
     private router: Router,
@@ -47,17 +48,9 @@ import {MemberService} from '../../services/member.service';
   isFormInEditMode(): boolean {
     return !!this.currentItemId;
   }
-  onSubmit(): void {
-    const objectToSubmit = {...this.item, ...this.form.value};
-    console.log(objectToSubmit);
-    if (this.isFormInEditMode()) {
-      this.memberService.updateMember(this.currentItemId, objectToSubmit).then(() => {
-        this.router.navigate(['./members']);
-      });
-    } else {
-      this.memberService.createMember(objectToSubmit).then(() => {
-        this.router.navigate(['./members']);
-      });
-    }
+  selectChangeHandler(event: any): string {
+    console.log(this.radioSelected);
+    return this.radioSelected = this.radioSelected.valueOf();
+
   }
 }

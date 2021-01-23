@@ -1,37 +1,21 @@
 
-<p>member-form works!</p>
-<div class="container">
 
-  <h4>Create New Member</h4>
 
-<form [formGroup]="form" *ngIf="!!form" (ngSubmit)="onSubmit()" fxLayout="column">
-  <mat-form-field>
-    <input matInput placeholder="cin" formControlName="cin">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="nom" formControlName="nom">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="prenom" formControlName="prenom">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="password" formControlName="password">
-  </mat-form-field>
+<h1> Vous etes Etudiants ou Enseingant</h1>
+<mat-grid-list cols="2" rowHeight="1:0.2" >
 
-  <mat-form-field appearance="fill">
-    <input matInput [matDatepicker]="picker" placeholder="dateNaissance" formControlName="dateNaissance">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+  <mat-grid-tile>
 
-  <mat-form-field>
-    <input matInput placeholder="cv"  formControlName="cv">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="email" formControlName="email" >
-  </mat-form-field>
-  <div class="form-element">
-    <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.invalid">Submit</button>
-  </div>
-</form>
-</div>
+    <mat-radio-group class="example-radio-group" (change)="selectChangeHandler($event)" [(ngModel)]="radioSelected" >
+
+      <mat-radio-button class="example-radio-button" value="etd">Etudiants</mat-radio-button>
+
+      <mat-radio-button class="example-radio-button" value="ens">Enseignant Chercheur</mat-radio-button>
+
+    </mat-radio-group>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<app-etudiant-form *ngIf="radioSelected == 'etd'"></app-etudiant-form>
+<app-enseignant-form *ngIf="radioSelected.valueOf() == 'ens'"></app-enseignant-form>
+

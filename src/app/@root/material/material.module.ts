@@ -67,7 +67,8 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
     MatSortModule,
     MatPaginatorModule,
     MatRippleModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+
   ],
   exports: [
     MatCheckboxModule,

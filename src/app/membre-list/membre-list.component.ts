@@ -1,11 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MemberService} from '../../services/member.service';
 import {Member} from '../../models/member.model';
 import {ConfirmDialogComponent} from '../@root/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-
+import {Etudiant} from '../../models/etudiant.model';
+import {EnseignantChercheur} from '../../models/enseignantChercheur.model';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+declare var require: any;
+const FileSaver = require('file-saver');
 @Component({
   selector: 'app-membre-list',
   templateUrl: './membre-list.component.html',
@@ -16,8 +21,16 @@ export class MembreListComponent implements OnInit , OnDestroy {
   /** Subject that emits when the component has been destroyed. */
     // tslint:disable-next-line:variable-name
   protected _onDestroy = new Subject<void>();
-  displayedColumns: string[] = ['id', 'cin', 'nom', 'photo', 'cv', 'dateNaissance', 'email', 'password', 'actions'];
-  dataSource: Member[] = [];
+
+  displayedColumns: string[] = ['id', 'cin', 'nom', 'cv', 'dateNaissance', 'email', 'password','details'];
+  displayedColumns2: string[] = ['id', 'cin', 'nom',  'cv', 'dateNaissance', 'email', 'password','sujet','diplome','Encadrant' ,'details','edit','delete'];
+  displayedColumns3: string[] = ['id', 'cin', 'nom', 'cv', 'dateNaissance', 'email', 'password','etablissement','grade','etudiant' ,'details','edit','delete'];
+  radioSelected:string = '';
+  //dataSource: Member[] = [];
+  public dataSource = new MatTableDataSource<Member>();
+  public dataSource2 = new MatTableDataSource<Etudiant>();
+  public dataSource3= new MatTableDataSource<EnseignantChercheur>();
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private memberService: MemberService,
@@ -28,6 +41,30 @@ export class MembreListComponent implements OnInit , OnDestroy {
   ngOnInit(): void {
 
     this.fetchDataSource();
+    this.fetchDataSource2();
+    this.fetchDataSource3();
+
+
+  }
+  downloadPdf(pdfUrl: string, pdfName: string ): void {
+
+    FileSaver.saveAs(pdfUrl, pdfName);
+  }
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  }
+  public doFilter2 = (value: string) => {
+    this.dataSource2.filter = value.trim().toLocaleLowerCase();
+  }
+  public doFilter3 = (value: string) => {
+    this.dataSource3.filter = value.trim().toLocaleLowerCase();
+  }
+
+  selectChangeHandler (event: any): string {
+    //update the ui
+    console.log(this.radioSelected);
+    return this.radioSelected = this.radioSelected.valueOf();
+
   }
   ngOnDestroy(): void {
     this._onDestroy.next();
@@ -36,23 +73,80 @@ export class MembreListComponent implements OnInit , OnDestroy {
 
   fetchDataSource(): void {
     this.memberService.getAllMembers().then(data => {
-      this.dataSource = data;
+      this.dataSource.data = data;
+      console.log(this.dataSource);
     });
   }
-
+  fetchDataSource2(): void {
+    this.memberService.getAllEtudiantsMembers().then(data => {
+      this.dataSource2.data = data;
+    });
+  }
+  fetchDataSource3(): void {
+    this.memberService.getAllEnseniantMembers().then(data => {
+      this.dataSource3.data = data;
+    });
+  }
   onRemoveAccount(id: any): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       hasBackdrop: true,
       disableClose: false,
     });
 
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        this.memberService.removeMemberById(id).then(() => {
+          this.fetchDataSource();
+          }
+
+
+        );
+      }
+    });
+  }
+  onRemoveAccount2(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
 
     dialogRef.componentInstance.confirmButtonColor = 'warn';
 
     dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
       console.log('removing: ', isDeleteConfirmed);
       if (isDeleteConfirmed) {
-        this.memberService.removeMemberById(id).then(() => this.fetchDataSource());
+        this.memberService.removeMemberById(id).then(() => {
+          this.fetchDataSource();
+          this.fetchDataSource2();
+
+          }
+
+
+        );
+      }
+    });
+  }
+  onRemoveAccount3(id: any): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      hasBackdrop: true,
+      disableClose: false,
+    });
+
+    dialogRef.componentInstance.confirmButtonColor = 'warn';
+
+    dialogRef.afterClosed().pipe(takeUntil(this._onDestroy)).subscribe(isDeleteConfirmed => {
+      console.log('removing: ', isDeleteConfirmed);
+      if (isDeleteConfirmed) {
+        this.memberService.removeMemberById(id).then(() => {
+          this.fetchDataSource();
+          this.fetchDataSource3();
+          }
+
+
+        );
       }
     });
   }

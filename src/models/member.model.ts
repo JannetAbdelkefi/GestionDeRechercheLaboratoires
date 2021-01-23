@@ -1,4 +1,7 @@
-export interface Member {
+import {Publication} from './publication.model';
+import {EnseignantChercheur} from './enseignantChercheur.model';
+
+export class Member {
   id: string;
   cin: string;
   nom: string;
@@ -8,5 +11,7 @@ export interface Member {
   photo: string;
   email: string;
   password: string;
+  pubs: Publication[];
+  encadrant: EnseignantChercheur;
 
 }

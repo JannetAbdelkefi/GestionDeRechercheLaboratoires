@@ -9,9 +9,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MemberFormComponent } from './member-form/member-form.component';
 import {SharedModule} from './@root/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PublicationListComponent } from './publication-list/publication-list.component';
+import { EtudiantFormComponent } from './etudiant-form/etudiant-form.component';
+import { EnseignantFormComponent } from './enseignant-form/enseignant-form.component';
+import { PubsFormComponent } from './pubs-form/pubs-form.component';
+import { OutilFormComponent } from './outil-form/outil-form.component';
+import { EventsFormComponent } from './events-form/events-form.component';
+import { OutilListComponent } from './outil-list/outil-list.component';
+import { AddoutiltomembreComponent } from './addoutiltomembre/addoutiltomembre.component';
+import { AddEventsTomembreComponent } from './add-events-tomembre/add-events-tomembre.component';
+import { AddPubTomembreComponent } from './add-pub-tomembre/add-pub-tomembre.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { FicheEncadrantComponent } from './fiche-encadrant/fiche-encadrant.component';
+import { ChangerEncadrantsComponent } from './changer-encadrants/changer-encadrants.component';
+import { ListesDesEtudiantsComponent } from './listes-des-etudiants/listes-des-etudiants.component';
+import { AddEtudiantToEnsComponent } from './add-etudiant-to-ens/add-etudiant-to-ens.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +35,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MemberFormComponent,
     LayoutComponent,
     DashboardComponent,
+    PublicationListComponent,
+    EtudiantFormComponent,
+    EnseignantFormComponent,
+    PubsFormComponent,
+    OutilFormComponent,
+    EventsFormComponent,
+    OutilListComponent,
+    AddoutiltomembreComponent,
+    AddEventsTomembreComponent,
+    AddPubTomembreComponent,
+    EventListComponent,
+    FicheEncadrantComponent,
+    ChangerEncadrantsComponent,
+    ListesDesEtudiantsComponent,
+    AddEtudiantToEnsComponent,
 
 
 
@@ -32,6 +62,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,*/
     SharedModule,
     ReactiveFormsModule,
+    FormsModule,
 
   ],
   providers: [],
